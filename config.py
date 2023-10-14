@@ -31,8 +31,8 @@ class Config(object):
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "5552531861:AAFIAB4cR8-OZMuQxR3Wi4IgBi5mTX_gfIs") 
    
     # database config
-    DB_NAME = os.environ.get("DB_NAME","amit")     
-    DB_URL  = os.environ.get("DB_URL","mongodb+srv://amit:amit@cluster0.l8kek4n.mongodb.net/?retryWrites=true&w=majority")
+    DB_NAME = os.environ.get("DB_NAME","filetolinkbot")     
+    DB_URL  = os.environ.get("DB_URL","mongodb+srv://amit:amit@cluster0.tkfrkjl.mongodb.net/?retryWrites=true&w=majority")
  
     # other configs
     BOT_UPTIME  = time.time()
