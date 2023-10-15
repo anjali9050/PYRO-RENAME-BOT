@@ -76,7 +76,7 @@ async def doc(bot, update):
     new_file_name = new_name.split(":-")[1]
 
     try:
-        await update.message.chat.send_action(telegram.ChatAction.TYPING)
+        await update.message.chat.send_action("typing")
         file = await update.message.download()
     except FloodWait as e:
         await update.message.reply_chat_action("cancel")
