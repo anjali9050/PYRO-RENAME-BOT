@@ -2,7 +2,6 @@ from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
-from pyrogram.types import ChatAction
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 
@@ -77,7 +76,7 @@ async def doc(bot, update):
     new_file_name = new_name.split(":-")[1]
 
     try:
-        await update.message.reply_chat_action(ChatAction.TYPING)
+        await update.message.chat.send_action(telegram.ChatAction.TYPING)
         file = await update.message.download()
     except FloodWait as e:
         await update.message.reply_chat_action("cancel")
