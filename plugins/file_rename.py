@@ -37,9 +37,6 @@ async def rename_start(client, message):
     )
   except:
     pass
-
-
-
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client, message):
   reply_message = message.reply_to_message
@@ -69,13 +66,31 @@ async def refunc(client, message):
       button.append([InlineKeyboardButton("🎵 Aᴜᴅɪᴏ", callback_data = "upload_audio")])
     await message.reply(
       text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-**`{new_name}`",
-      reply_to_message_id=file.id,
-      reply_markup=InlineKeyboardMarkup(button)
-    )
-
-
-
+      reply_to_message_id=file.id,
+      reply_markup=InlineKeyboardMarkup(button)
+    )
 @Client.on_callback_query(filters.regex("upload"))
 async def doc(bot, update):   
   new_name = update.message.text
-  new_filename = new_name.split(":-")[1]
+  new_file_name = new_name.split(":-")[1]
+
+  try:
+    await update.message.reply_chat_action("typing")
+    file = await update.message.download()
+  except FloodWait as e:
+    await update.message.reply_chat_action("cancel")
+    await update.message.reply_text(
+      text=f"**Unable to download file!**\n**Reason:** FloodWait ({e.value} seconds)."
+    )
+    return
+
+  if os.path.exists(f"downloads/{new_file_name}"):
+    await update.message.reply_text(
+      text=f"**File already exists!**\n**Please choose a different name.**"
+    )
+  else:
+    os.rename(file, f"downloads/{new_file_name}")
+    await update.message.reply_chat_action("cancel")
+    await update.message.reply_text(
+        text=f"**File renamed successfully!**\n**New file name:** `{new_file_name}`"
+    )
