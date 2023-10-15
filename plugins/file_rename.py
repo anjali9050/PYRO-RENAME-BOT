@@ -16,9 +16,9 @@ import os, time
 
 @Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def rename_start(client, message):
-  file = getattr(message, message.media.value)
-  filename = file.file_name  
-  if file.file_size > 2000 * 1024 * 1024:
+  file = getattr(message, message.media.value)
+  filename = file.file_name  
+  if file.file_size > 2000 * 1024 * 1024:
      return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ")
 
   try:
